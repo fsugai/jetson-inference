@@ -292,8 +292,9 @@ bool gstCamera::buildLaunchStr()
 	else
 	{
 		ss << "v4l2src device=/dev/video" << mV4L2Device << " ! ";
-		ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
-		ss << "format=RGB ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
+		//		ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
+		//		ss << "format=RGB !";
+		ss << "videoconvert ! video/x-raw, format=RGB ! videocrop right=2208 ! videoscale ! video/x-raw, width=800 ! videoconvert !";
 		ss << "appsink name=mysink";
 	}
 	
