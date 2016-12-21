@@ -15,6 +15,7 @@
 #include "cudaFont.h"
 #include "imageNet.h"
 
+#include <stdlib.h>
 
 #define DEFAULT_CAMERA 0	// -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
 		
@@ -146,12 +147,14 @@ int main( int argc, char** argv )
 	
 		if( img_class >= 0 )
 		{
-			printf("imagenet-camera:  %2.5f%% class #%i (%s)\n", confidence * 100.0f, img_class, net->GetClassDesc(img_class));	
+		  //printf("imagenet-camera:  %2.5f%% class #%i (%s)\n", confidence * 100.0f, img_class, net->GetClassDesc(img_class));	
 
 			if( font != NULL )
 			{
 				char str[256];
 				sprintf(str, "%05.2f%% %s", confidence * 100.0f, net->GetClassDesc(img_class));
+				//fprintf(stderr, "%s\n", net->GetClassDesc(img_class));
+				fprintf(stdout, "hoge%s\n", net->GetClassDesc(img_class));
 	
 				font->RenderOverlay((float4*)imgRGBA, (float4*)imgRGBA, camera->GetWidth(), camera->GetHeight(),
 								    str, 0, 0, make_float4(255.0f, 255.0f, 255.0f, 255.0f));
